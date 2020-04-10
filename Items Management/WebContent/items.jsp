@@ -1,12 +1,24 @@
+<%@page import="com.Item"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
 <%
 	if (request.getParameter("itemCode") != null)  {  
-		session.setAttribute("itemCode", request.getParameter("itemCode"));  
-		session.setAttribute("itemName", request.getParameter("itemName"));  
-		session.setAttribute("itemPrice", request.getParameter("itemPrice"));  
-		session.setAttribute("itemDesc", request.getParameter("itemDesc"));  
+		//session.setAttribute("itemCode", request.getParameter("itemCode"));  
+		//session.setAttribute("itemName", request.getParameter("itemName"));  
+		//session.setAttribute("itemPrice", request.getParameter("itemPrice"));  
+		//session.setAttribute("itemDesc", request.getParameter("itemDesc"));  
+		
+		Item itemObj = new Item();  
+		itemObj = new Item();   
+				String stsMsg = itemObj.insertItem(request.getParameter("itemCode"),     
+				request.getParameter("itemName"),     
+				request.getParameter("itemPrice"),        
+				request.getParameter("itemDesc")); 
+		 
+				 session.setAttribute("statusMsg", stsMsg); 
+		//itemObj.connect();//For testing the connect method 
+		
 	}  
 
 %>
@@ -26,6 +38,7 @@
 			Item description: <input name="itemDesc" type="text" ><br>   
 			<input name="btnSubmit" type="submit" value="Save">  
 		</form> 
+		<% out.print(session.getAttribute("statusMsg")); %> 
 		
 		<br> 
  
